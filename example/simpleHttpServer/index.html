@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wapper">
+        <ul id="message"></ul>
+        <div id="btns">
+            <button class="action" data-action='jiandao'>剪刀</button>
+            <button class="action" data-action='shitou'>石头</button>
+            <button class="action" data-action='bu'>布</button>
+        </div>
+    </div>
+    <script>
+        btns.addEventListener('click', e => {
+            const target = e.target;
+            const action = target.dataset.action;
+            fetch(`http://${location.host}/game?action=${action}`).then(
+                res => {
+                    res.text().then( text => {
+                        const li = document.createElement('li');
+                        console.log(text);
+                        li.innerHTML = text;
+                        message.appendChild(li);
+                    } );
+
+                }
+            ).catch( err => {
+                console.log(err)
+            })
+        } );
+    </script>
+</body>
+</html>
